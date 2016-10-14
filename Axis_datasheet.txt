@@ -1,0 +1,14 @@
+Axis M1013 Network Camera
+FOV: 67 degrees, 1.16937 radian
+Sensor width: 6.35mm
+Focal length: 2.8mm
+Focal length pixels: 282.2047
+Yaw angle to target: arctan((x - 319.5) / 282.2047)
+Color level: 50
+Brightness: 55
+Sharpness: 50
+Contrast: 100
+White balance: Fixed outdoor 1
+Exposure: 0
+Exposure priority: Motion
+NO BACKLIGHT COMPENSATION
