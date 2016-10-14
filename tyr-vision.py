@@ -75,6 +75,8 @@ def main():
 
                 epsilon = 0.012 * cv2.arcLength(largestContour, True) 
                 approx = cv2.approxPolyDP(largestContour, epsilon, True) #approvimate polygon from contour
+                
+                corners = getCorners(approx)
 
                 x = corners[0][0]
                 y = corners[0][1]
