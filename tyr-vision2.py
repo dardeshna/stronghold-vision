@@ -6,7 +6,7 @@ from networktables import NetworkTable
 import operator
 from math import *
 
-cap = cv2.VideoCapture("http://10.0.8.23/live")
+cap = cv2.VideoCapture("http://10.32.100.210/live")
 
 WIDTH = 640
 HEIGHT = 480
@@ -16,6 +16,11 @@ f = 566.0699 #calculated for iPhone SE
 
 goal_width = 1.6875
 goal_height = 0.9583
+
+goal_points = np.float32([[0, 0, 0],
+                          [goal_width, 0, 0],
+                          [goal_width, goal_height, 0],
+                          [0, goal_height, 0]])
 
 """
 #Green HSV Values
@@ -80,8 +85,14 @@ def main():
             x = corners[0][0]
             y = corners[0][1]
 
-                    
-            calculated = calculate(corners)
+            K = np.float32([[f, 0, 0.5*(WIDTH-1)],
+                        [0, f, 0.5*(HEIGHT-1)],
+                        [0.0,0.0, 1.0]])
+            
+            ret, rvec, tvec = cv2.solvePnP(goal_points, np.float32((corners, )), K, None, flags=2)
+
+            calculated = (tvec[0], tvec[2], tvec[1], 0, 0)
+                                           
             angle = np.rad2deg(np.arctan((x - WIDTH/2) / f))
 
             draw_HUD(img, x, y, fps, angle, calculated) #draw the hud on the flipped image
